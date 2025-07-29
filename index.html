@@ -46,6 +46,18 @@
             height: 300px;
             width: 100%;
         }
+        #sidebar {
+  pointer-events: auto;
+}
+
+#sidebar.hidden {
+  display: none !important;
+}
+
+#mobile-menu-button {
+  z-index: 9999; /* pastikan tombol tidak ketutupan */
+  position: relative;
+}
     </style>
 </head>
 <body class="bg-gray-100">
@@ -708,8 +720,10 @@
         });
 
         // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('hidden');
+    sidebar.classList.toggle('active');
         });
 
         // Mobile logout
@@ -756,6 +770,20 @@
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('input-date').value = today;
         });
+        // Tutup sidebar jika klik di luar sidebar dan tombol hamburger
+        document.addEventListener('click', function (e) {
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = document.getElementById('mobile-menu-button');
+
+    if (
+        sidebar.classList.contains('active') &&
+        !sidebar.contains(e.target) &&
+        !menuBtn.contains(e.target)
+    ) {
+        sidebar.classList.add('hidden');
+        sidebar.classList.remove('active');
+    }
+});
     </script>
 </body>
 </html>
