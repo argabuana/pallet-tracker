@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="favicon.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
@@ -46,18 +45,6 @@
             height: 300px;
             width: 100%;
         }
-        #sidebar {
-  pointer-events: auto;
-}
-
-#sidebar.hidden {
-  display: none !important;
-}
-
-#mobile-menu-button {
-  z-index: 9999; /* pastikan tombol tidak ketutupan */
-  position: relative;
-}
     </style>
 </head>
 <body class="bg-gray-100">
@@ -281,7 +268,7 @@
                     </div>
                     
                     <div class="bg-white rounded-lg shadow p-6">
-                        <h2 class="text-lg font-semibold mb-4">Ringkasan Statistik</h2>
+                        <h2 class="text-lg font-semibold mb-4">Statistik Cepat</h2>
                         <div class="chart-container">
                             <canvas id="quick-stats-chart"></canvas>
                         </div>
@@ -720,10 +707,8 @@
         });
 
         // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function () {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('hidden');
-    sidebar.classList.toggle('active');
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
         });
 
         // Mobile logout
@@ -770,20 +755,6 @@
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('input-date').value = today;
         });
-        // Tutup sidebar jika klik di luar sidebar dan tombol hamburger
-        document.addEventListener('click', function (e) {
-            const sidebar = document.getElementById('sidebar');
-            const menuBtn = document.getElementById('mobile-menu-button');
-
-    if (
-        sidebar.classList.contains('active') &&
-        !sidebar.contains(e.target) &&
-        !menuBtn.contains(e.target)
-    ) {
-        sidebar.classList.add('hidden');
-        sidebar.classList.remove('active');
-    }
-});
     </script>
 </body>
 </html>
